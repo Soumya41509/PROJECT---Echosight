@@ -26,6 +26,11 @@ generation_config = {
 
 st.image("logo.png", width=200)
 
+def translate_text(text, language):
+    translator = GoogleTranslator(source='auto', target=language)
+    translated_text = translator.translate(text)
+    return translated_text
+
 def main():
     # Initialize session state
     if "objects_detected_text" not in st.session_state:
@@ -86,7 +91,7 @@ def main():
             target_language = st.selectbox("Select target language:", ["Gujrati(gu)", "Kannada(kn)", "Malayalam(ml)", "Marathi(mr)", "Urdu(ur)", "Hindi(hi)", "Bengali(bn)", "Tamil(ta)", "Telegu(te)"])
             language=target_language[-3:-1]
 
-    # Translate text on button click
+            # Translate text on button click
             if st.button("Translate"):
                     translated_text = translate_text(st.session_state.objects_detected_text, language)
                     st.success(f"Translation: {translated_text}")
@@ -103,5 +108,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-
